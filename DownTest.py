@@ -40,7 +40,7 @@ class UNIVIEW_CDS:
         lasterr = ''
         for i in range(HTTP_GET_RETRY_NUM):
             # 带fid的文件路径
-			if 'fid=' in url:
+	    if 'fid=' in url:
                 piclen = int(url.split('-')[-1], 16)
             else:
                 # 不带fid的文件路径
