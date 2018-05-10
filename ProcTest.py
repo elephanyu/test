@@ -100,6 +100,9 @@ if __name__ == '__main__':
             '/usrDirCode5178/20180330/6101004027/01/2/K_610100402700_01_2_20180330101412615_1.jpg?dev=cdvserver2&fid=792839-17-6716200000-A77F71-23704',
             '/usrDirCode5178/20180330/6101006001/01/2/K_20180330101416402_1_533944.jpg?dev=cdvserver3&fid=7289-23-190C200007-1C2C3A4-87EF7'
         ]
-    proc = Proc(urls)
-    proc.start()
-    proc.join()
+    try:
+        proc = Proc(urls)
+        proc.start()
+        proc.join()
+    except Exception:
+        print traceback.format_exc()
