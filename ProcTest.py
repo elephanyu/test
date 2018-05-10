@@ -62,6 +62,7 @@ class Thred(Thread):
                 piclen = int(self.url.split('-')[-1], 16)
             else:
                 class tagCDSFileStat(ctypes.Structure):
+                    _pack_ = 4
                     _fields_ = [
                         ('szFileName', ctypes.c_char * 256),
                         ('dulFileCapacity', ctypes.c_ulonglong),
