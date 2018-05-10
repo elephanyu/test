@@ -94,12 +94,19 @@ class Thred(Thread):
         print 'exception occurs when get url[%s]. [%s]' % (self.url, lasterr)
 
 if __name__ == '__main__':
-    urls = [
+    links = [
             '/20180322/6101007005/3/2/20180322194058000859721_1.jpg',
             '/20180330/6101012059/20180330101316944_PIC_1_254673.jpg'
             '/usrDirCode5178/20180330/6101004027/01/2/K_610100402700_01_2_20180330101412615_1.jpg?dev=cdvserver2&fid=792839-17-6716200000-A77F71-23704',
             '/usrDirCode5178/20180330/6101006001/01/2/K_20180330101416402_1_533944.jpg?dev=cdvserver3&fid=7289-23-190C200007-1C2C3A4-87EF7'
         ]
+    urls = []
+    for link in links:
+        if 'fid=' in link:
+            url = '%s:%s%s' % (UNIVIEW_STORAGE_IP, UNIVIEW_STORAGE_PORT, link)
+        else:
+            url = '%s:%s/%s%s' % (UNIVIEW_STORAGE_IP, UNIVIEW_STORAGE_PORT, 'usrDirCode5178', link)
+        urls.append(url)
     try:
         proc = Proc(urls)
         proc.start()
