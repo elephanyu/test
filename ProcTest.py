@@ -41,8 +41,10 @@ class Proc(Process):
     def run(self):
         threads = []
         for url in self.urls:
-            thread = Thread(self.lib, url)
-            threads.append(thread)
+            thread1 = Thread(self.lib, url)
+            thread2 = Thread(self.lib, url)
+            threads.append(thread1)
+            threads.append(thread2)
 
         for thread in threads:
             thread.start()
@@ -79,7 +81,7 @@ class Thred(Thread):
                 piclen = filestat.dulFileCapacity
                 # piclen = 3 * 1024 * 1024
         pic_buf = ctypes.create_string_buffer('', piclen)
-        ret = self._lib.CDS_ReadOnceEx(ctypes.c_char_p(self.url), ctypes.c_uint(0), ctypes.c_uint(piclen), pic_buf)
+        ret = self.lib.CDS_ReadOnceEx(ctypes.c_char_p(self.url), ctypes.c_uint(0), ctypes.c_uint(piclen), pic_buf)
         if ret < 0:
             lasterr = 'uniview CDS_ReadOnceEx err：%s' % ret
             continue
