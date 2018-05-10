@@ -41,8 +41,8 @@ class Proc(Process):
     def run(self):
         threads = []
         for url in self.urls:
-            thread1 = Thread(self.lib, url)
-            thread2 = Thread(self.lib, url)
+            thread1 = Thred(self.lib, url)
+            thread2 = Thred(self.lib, url)
             threads.append(thread1)
             threads.append(thread2)
 
