@@ -18,7 +18,7 @@ class UNIVIEW_CDS:
         if not ret:
             sys.exit()
         else:
-            self._lib = ret
+            self.lib = ret
 
     def get_init_lib(self):
         try:
@@ -35,7 +35,7 @@ class UNIVIEW_CDS:
             print traceback.format_exc()
             return None
 	
-	# 下载函数
+    # 下载函数
     def download(self, url):
         lasterr = ''
         for i in range(HTTP_GET_RETRY_NUM):
@@ -43,7 +43,7 @@ class UNIVIEW_CDS:
 			if 'fid=' in url:
                 piclen = int(url.split('-')[-1], 16)
             else:
-				# 不带fid的文件路径
+                # 不带fid的文件路径
                 class tagCDSFileStat(ctypes.Structure):
                     _fields_ = [
                         ('szFileName', ctypes.c_char * 256),
@@ -64,7 +64,7 @@ class UNIVIEW_CDS:
                     piclen = filestat.dulFileCapacity
                     # piclen = 3 * 1024 * 1024
             pic_buf = ctypes.create_string_buffer('', piclen)
-            ret = self._lib.CDS_ReadOnceEx(ctypes.c_char_p(url), ctypes.c_uint(0), ctypes.c_uint(piclen), pic_buf)
+            ret = self.lib.CDS_ReadOnceEx(ctypes.c_char_p(url), ctypes.c_uint(0), ctypes.c_uint(piclen), pic_buf)
             if ret < 0:
                 lasterr = 'uniview CDS_ReadOnceEx err：%s' % ret
                 continue
