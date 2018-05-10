@@ -45,6 +45,7 @@ class UNIVIEW_CDS:
             else:
                 # 不带fid的文件路径
                 class tagCDSFileStat(ctypes.Structure):
+		    _pack_ = 4
                     _fields_ = [
                         ('szFileName', ctypes.c_char * 256),
                         ('dulFileCapacity', ctypes.c_ulonglong),
