@@ -58,38 +58,38 @@ class Thred(Thread):
     def run(self):
         lasterr = ''
         for i in range(HTTP_GET_RETRY_NUM):
-        if 'fid=' in self.url:
-            piclen = int(self.url.split('-')[-1], 16)
-        else:
-            class tagCDSFileStat(ctypes.Structure):
-                _fields_ = [
-                    ('szFileName', ctypes.c_char * 256),
-                    ('dulFileCapacity', ctypes.c_ulonglong),
-                    ('lCTime', ctypes.c_int),
-                    ('lMTime', ctypes.c_int),
-                    ('ulStat', ctypes.c_uint),
-                    ('dulDirId', ctypes.c_ulonglong),
-                    ('ulOpStat', ctypes.c_ulong)
-                ]
+            if 'fid=' in self.url:
+                piclen = int(self.url.split('-')[-1], 16)
+            else:
+                class tagCDSFileStat(ctypes.Structure):
+                    _fields_ = [
+                        ('szFileName', ctypes.c_char * 256),
+                        ('dulFileCapacity', ctypes.c_ulonglong),
+                        ('lCTime', ctypes.c_int),
+                        ('lMTime', ctypes.c_int),
+                        ('ulStat', ctypes.c_uint),
+                        ('dulDirId', ctypes.c_ulonglong),
+                        ('ulOpStat', ctypes.c_ulong)
+                    ]
 
-            filestat = tagCDSFileStat()
-            ret1 = self.lib.CDS_GetFileStat(ctypes.c_char_p(self.url), ctypes.byref(filestat))
-            if ret1 < 0:
-                lasterr = 'uniview CDS_GetFileStat err'
+                filestat = tagCDSFileStat()
+                ret1 = self.lib.CDS_GetFileStat(ctypes.c_char_p(self.url), ctypes.byref(filestat))
+                if ret1 < 0:
+                    lasterr = 'uniview CDS_GetFileStat err'
+                    continue
+                else:
+                    piclen = filestat.dulFileCapacity
+                    # piclen = 3 * 1024 * 1024
+            pic_buf = ctypes.create_string_buffer('', piclen)
+            ret = self.lib.CDS_ReadOnceEx(ctypes.c_char_p(self.url), ctypes.c_uint(0), ctypes.c_uint(piclen), pic_buf)
+            if ret < 0:
+                lasterr = 'uniview CDS_ReadOnceEx err：%s' % ret
                 continue
             else:
-                piclen = filestat.dulFileCapacity
-                # piclen = 3 * 1024 * 1024
-        pic_buf = ctypes.create_string_buffer('', piclen)
-        ret = self.lib.CDS_ReadOnceEx(ctypes.c_char_p(self.url), ctypes.c_uint(0), ctypes.c_uint(piclen), pic_buf)
-        if ret < 0:
-            lasterr = 'uniview CDS_ReadOnceEx err：%s' % ret
-            continue
-        else:
-            filename = self.name + '.jpg'
-            with open(filename, 'wb+') as fp:
-                fp.write(pic_buf[0:ret])
-            print 'download %s success and saved in %s' % (self.url, filename)
+                filename = self.name + '.jpg'
+                with open(filename, 'wb+') as fp:
+                    fp.write(pic_buf[0:ret])
+                print 'download %s success and saved in %s' % (self.url, filename)
         print 'exception occurs when get url[%s]. [%s]' % (self.url, lasterr)
 
 if __name__ == '__main__':
