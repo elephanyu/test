@@ -40,14 +40,17 @@ class Proc(Process):
 
     def run(self):
         threads = []
-        for url in self.urls:
-            thread1 = Thred(self.lib, url)
-            thread2 = Thred(self.lib, url)
-            threads.append(thread1)
-            threads.append(thread2)
-
-        for thread in threads:
-            thread.start()
+        ret = self.get_init_lib()
+        if ret is not None:
+            for url in self.urls:
+                thread1 = Thred(self.lib, url)
+                thread2 = Thred(self.lib, url)
+                threads.append(thread1)
+                threads.append(thread2)
+            for thread in threads:
+                thread.start()
+        else:
+            print 'lib init err'
 
 class Thred(Thread):
     def __init__(self, lib, url):
