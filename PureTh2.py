@@ -69,6 +69,8 @@ class Threader2(Thread):
             t2.setUrl(self.url)
             t1.start()
             t2.start()
+            t1.join()
+            t2.join()
         else:
             print 'lib init err'
 
@@ -82,4 +84,5 @@ if __name__ == '__main__':
     t = Threader2()
     t.setUrl(url)
     t.start()
+    t.join()
 

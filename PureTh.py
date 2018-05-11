@@ -53,5 +53,7 @@ if __name__ == '__main__':
         t2.setUrl(url)
         t1.start()
         t2.start()
+        t1.join()
+        t2.join()
     else:
         print 'lib init err'

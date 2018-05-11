@@ -62,6 +62,8 @@ class Procer(Process):
             threads.append(t)
         for thread in threads:
             thread.start()
+        for thread in threads:
+            thread.join()
 
 if __name__ == '__main__':
     links = [
@@ -88,5 +90,7 @@ if __name__ == '__main__':
         p2.setUrls(urls)
         p1.start()
         p2.start()
+        p1.join()
+        p2.join()
     else:
         print 'lib init err'

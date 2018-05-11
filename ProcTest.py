@@ -49,6 +49,8 @@ class Proc(Process):
                 threads.append(thread2)
             for thread in threads:
                 thread.start()
+            for thread in threads:
+                thread.join()
         else:
             print 'lib init err'
 
