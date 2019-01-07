@@ -7,6 +7,7 @@
 #         for element in sublist:
 #             yield element
 # list(flatten(nested))
+# 使用生成器解决八皇后问题
 
 def conflict(state, nextX):
     # state 前面皇后的水平位置
