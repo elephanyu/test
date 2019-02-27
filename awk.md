@@ -163,25 +163,25 @@
         - 输出格式为：\%\-width.precision format\-specifier
             + width 指定宽度，未达到时填满, printf("\%\-20s","xxx")
             + precision 用于十进制或浮点数，控制小数点右边的数字位数， printf("%.2f",2.23432)
-        - 内置函数
-            - 字符串函数
-                + sub(/reg/,newsubstr,str) 只替换第一个匹配字符串
-                + gsub(/reg/,newsubstr,str) 将字符串str中所有符合/reg/正则的自传替换为字符串newsubstr
-                + index(str,substr) 返回自传substr在串str中的索引
-                + length(str) 返回字符串的长度
-                + match(str,/reg/) 如果在串str中找到正则/reg/匹配的串，则返回出现的位置，未找到则返回0
-                + split(str,array,sep) 使用分隔符sep吧字符串分解成数组array
-                + substr(str,position\[,length\]) 返回str中从position开始的length个字符串
-                + toupper(str) 对字符串进行大小写转换
-                + sprintf("fmt",expr) 对expr使用printf格式说明
-            - 算数函数
-                + sin(x) 正弦函数
-                + cos(x) 余弦函数
-                + atan2(x,y) y，x范围内的余切
-                + int(x) 取整，过程没有舍入
-                + exp(x) 求幂
-                + log(x) 自然对数
-                + sqrt(x) 平方根
-                + rand() 尝试一个大于0小于医德随机数
-                + srand(x) x是rand()函数的种子
-            
+    - 内置函数
+        - 字符串函数
+            + sub(/reg/,newsubstr,str) 只替换第一个匹配字符串
+            + gsub(/reg/,newsubstr,str) 将字符串str中所有符合/reg/正则的自传替换为字符串newsubstr
+            + index(str,substr) 返回自传substr在串str中的索引
+            + length(str) 返回字符串的长度
+            + match(str,/reg/) 如果在串str中找到正则/reg/匹配的串，则返回出现的位置，未找到则返回0
+            + split(str,array,sep) 使用分隔符sep吧字符串分解成数组array
+            + substr(str,position\[,length\]) 返回str中从position开始的length个字符串
+            + toupper(str) 对字符串进行大小写转换
+            + sprintf("fmt",expr) 对expr使用printf格式说明
+        - 算数函数
+            + sin(x) 正弦函数
+            + cos(x) 余弦函数
+            + atan2(x,y) y，x范围内的余切
+            + int(x) 取整，过程没有舍入
+            + exp(x) 求幂
+            + log(x) 自然对数
+            + sqrt(x) 平方根
+            + rand() 尝试一个大于0小于医德随机数
+            + srand(x) x是rand()函数的种子
+
