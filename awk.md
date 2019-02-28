@@ -2,36 +2,38 @@
     - 基础
         - 设置多个分隔符  
             ```shell
+            # shell
             # 分隔符匹配一个或多个制表符或空格符
             awk -F"[\t ]+" '{print "device: "$1"\tfstype: "$3}' /etc/fstab
             ```   
         - begin end代码块
             ```shell
-                >>> cat search.awk
-                BEGIN {
-                    print "How many people with nologin?"
-                }
-                # adder没有初始化直接拿来使用
-                # 没处理输入数据的一条记录的过程中，adder变量原有的记录并没有被查出
-                /nologin/ {++adder}
-                END {
-                    print "'nologin' appears "adder" times."
-                }
-                >>> awk -f search.awk /etc/passwd
+            # shell
+            >>> cat search.awk
+            BEGIN {
+                print "How many people with nologin?"
+            }
+            # adder没有初始化直接拿来使用
+            # 没处理输入数据的一条记录的过程中，adder变量原有的记录并没有被查出
+            /nologin/ {++adder}
+            END {
+                print "'nologin' appears "adder" times."
+            }
+            >>> awk -f search.awk /etc/passwd
             ```
         - 模式匹配
             ```shell
-                >>> cat shell_record.awk
-                BEGIN {
-                    print "shell usage:"
-                }
-                /bash/ {++bash}
-                /nologin/ {++nologin}
-                END {
-                    print "we have "bash" bash users."
-                    print "we have "nologin" nologin users."
-                }
-                >>> awk -f shell_record.awk /etc/passwd
+            >>> cat shell_record.awk
+            BEGIN {
+                print "shell usage:"
+            }
+            /bash/ {++bash}
+            /nologin/ {++nologin}
+            END {
+                print "we have "bash" bash users."
+                print "we have "nologin" nologin users."
+            }
+            >>> awk -f shell_record.awk /etc/passwd
             ```
     - 变量与数组
         - 变量
@@ -47,11 +49,13 @@
                 - RS 输入记录分割字符
             - 数组
                 ```awk
+                # awk
                 site["xx"]="xx"
                 site["yy"]="yy"
                 ```
             - 环境变量
                 ```shell
+                # shell
                 >>> awk 'BEGIN{print ENVIRON["HOME"]};print ENVIRON["PATH"]}'
                 ```
     - 运算符
@@ -67,6 +71,7 @@
         - in 数组成员
     - 控制结构
         ```awk
+        # awk
         # if条件
         if (exp1) {
             statement1;
@@ -112,6 +117,7 @@
         ```
     - 自定义函数格式
         ```awk
+        # awk
         # 定义
         function funcname(arg1, arg2, ..., argn) {
             statement(s)
@@ -124,6 +130,7 @@
     - 引用传递(地址传递)和值传递
     - 递归调用
         ```shell
+        # shell
         >>> cat fib.awk
         function fib(nth)
         {
